@@ -13,12 +13,24 @@ class Guideline extends Component {
       <View 
         key={guideline.id} 
         style={{ 
-          backgroundColor: "white", marginTop: 15, borderRadius: 5, 
-          width: Dimensions.get('screen').width - 20, padding: 10
+          backgroundColor: "white", borderRadius: 5, 
+          width: Dimensions.get('screen').width - 20, padding: 10,
+          margin: 5,  
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 3,
+          },
+          shadowOpacity: 0.29,
+          shadowRadius: 4.65,
+
+          elevation: 7,
         }}
       >
-        <Text>Título: { guideline.title }</Text>
-        <Text>Descrição: { guideline.description }</Text>
+        <Text style={{ fontWeight: 'bold' }}>Título: </Text>
+        <Text>{ guideline.title }</Text>
+        <Text style={{ fontWeight: 'bold' }}>Descrição: </Text>
+        <Text>{ guideline.description }</Text>
       </View>
     );
   }
