@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
-import { Text } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
+import { loginStyle } from '../assets/styles/index'
+import FormLogin from '../components/FormLogin';
 
-class LoginScreen extends Component {
-  render() {
-    return <Text>LoginScreen</Text>;
-  }
-}
+const LoginScreen = () => (
+  <View style={loginStyle.container}>
+    <FormLogin />
+  </View>
+);
 
 export default LoginScreen;

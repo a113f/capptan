@@ -1,5 +1,5 @@
 const LOGO = require('./logo.png');
-const LOGO_CAPPTAN = require('./logo_cappitan.png');
+const LOGO_CAPPTAN = require('./logo_capptan.png');
 const MOBILE_EXPERT = require('./mobile_expert.png');
 const VERTICAL_MOBILE_EXPERT = require('./vertical_mobile_expert.png');
 
