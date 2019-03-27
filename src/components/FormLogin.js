@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Dimensions, TextInput, View } from 'react-native';
+import { AsyncStorage, Button, Dimensions, TextInput, View } from 'react-native';
 import Logo from './Logo';
+import { withNavigation } from 'react-navigation';
 
 class FormLogin extends Component {
 
@@ -9,8 +10,10 @@ class FormLogin extends Component {
     password: ''
   }
 
-  _login = () => {
-    console.log(this.state)
+  _login = async () => {
+    let { navigation } = this.props
+    await AsyncStorage.setItem('userToken', 'VRAU');
+    navigation.navigate('Actived')
   }
 
   render() {
@@ -53,4 +56,4 @@ class FormLogin extends Component {
   }
 }
 
-export default FormLogin;
+export default withNavigation(FormLogin);

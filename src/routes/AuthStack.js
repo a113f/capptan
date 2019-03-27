@@ -8,6 +8,8 @@ import LoginScreen from '../pages/LoginScreen';
 const AuthStack = createStackNavigator({ 
   Login: LoginScreen,
   SignIn: SignInScreen 
+}, {
+  headerMode: 'none'
 });
 
 export default AuthStack;
