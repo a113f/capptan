@@ -4,6 +4,12 @@ import { Text, View } from 'react-native';
 import { systemStyle } from '../assets/styles'
 
 class ProfileScreen extends Component {
+  static navigationOptions = () => ({
+    title: "PERFIL",
+    headerRight: null, 
+    headerLeft: null,
+  })
+
   render() {
     return (
       <View style={systemStyle.container}>

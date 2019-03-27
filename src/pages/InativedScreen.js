@@ -29,6 +29,12 @@ const guidelines = [
 ]
 
 class InativedScreen extends Component {
+  static navigationOptions = () => ({
+    title: "INATIVAS",
+    headerRight: null, 
+    headerLeft: null,
+  })
+
   render() {
     return (
       <View style={systemStyle.container}>

@@ -29,6 +29,13 @@ const guidelines = [
 ]
 
 class ActivedScreen extends Component {
+
+  static navigationOptions = () => ({
+    title: "ATIVADAS",
+    headerRight: null, 
+    headerLeft: null,
+  })
+
   render() {
     return (
       <View style={systemStyle.container}>
