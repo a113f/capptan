@@ -1,0 +1,4 @@
+const PRIMARY = "#E0A400";
+const SECONDARY = "#404042";
+
+export { SECONDARY, PRIMARY }

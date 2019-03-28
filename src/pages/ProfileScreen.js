@@ -1,12 +1,30 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
+import { AsyncStorage } from 'react-native';
+import { Button, Icon } from 'react-native-elements'
 
-import { systemStyle } from '../assets/styles'
+import { systemStyle } from '../assets/styles';
 
 class ProfileScreen extends Component {
-  static navigationOptions = () => ({
+  static navigationOptions = ({ navigation }) => ({
     title: "PERFIL",
-    headerRight: null, 
+    headerRight: (
+      <Button
+          onPress={() => {
+            AsyncStorage.removeItem('userToken');
+            navigation.navigate('AuthLoading');
+          }}
+          type="clear"
+          icon={
+            <Icon
+              type="font-awesome"
+              name="sign-out"
+              size={25}
+              color="white"
+            />
+          }
+        />
+    ), 
     headerLeft: null,
   })
 

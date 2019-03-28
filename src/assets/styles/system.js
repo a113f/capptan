@@ -5,7 +5,7 @@ const system = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ccc',
+    backgroundColor: '#8c8c8c',
   },
 });
 
