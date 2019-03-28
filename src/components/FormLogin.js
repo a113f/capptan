@@ -10,17 +10,35 @@ import { withNavigation } from 'react-navigation';
 import { systemStyle } from '../assets/styles';
 import { PRIMARY } from '../assets/styles/colors';
 
+import api from '../utils/api';
+
 class FormLogin extends Component {
 
   state = {
-    email: '',
-    password: ''
+    email: 'allef@gomes.com',
+    password: '12341234'
   }
 
   _login = async () => {
     let { navigation } = this.props
-    await AsyncStorage.setItem('userToken', 'VRAU');
-    navigation.navigate('Actived')
+    let { email, password } = this.state;
+
+    const response = await api.post('/auth', {
+      auth: { email, password }
+    });
+
+    if (response.ok) {
+      let { token } = response.data
+      
+      try {
+        await AsyncStorage.setItem('@Capptan:Token', token);
+        navigation.navigate('Actived')
+      } catch (error) {
+        
+      }
+    } else {
+      
+    }
   }
 
   render() {

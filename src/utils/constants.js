@@ -12,8 +12,8 @@ const NAVIGATION_HEADER = {
   defaultNavigationOptions: navigation_options,
   headerLayoutPreset: 'center' 
 }
-
 const WIDTH = Dimensions.get('screen').width
+const URL_BASE = "https://api-capptain.herokuapp.com/"
 
-export { WIDTH };
+export { URL_BASE, WIDTH };
 export default NAVIGATION_HEADER;

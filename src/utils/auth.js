@@ -13,7 +13,7 @@ class AuthLoadingScreen extends React.Component {
   }
 
   _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('userToken');
+    const userToken = await AsyncStorage.getItem('@Capptan:Token');
     this.props.navigation.navigate(userToken ? 'App' : 'Auth');
   };
 
