@@ -1,4 +1,5 @@
 import { PRIMARY, SECONDARY } from '../assets/styles/colors';
+import { Dimensions } from 'react-native';
 
 const navigation_options = {
   headerTintColor: PRIMARY,
@@ -12,4 +13,7 @@ const NAVIGATION_HEADER = {
   headerLayoutPreset: 'center' 
 }
 
+const WIDTH = Dimensions.get('screen').width
+
+export { WIDTH };
 export default NAVIGATION_HEADER;

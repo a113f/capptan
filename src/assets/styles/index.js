@@ -1,4 +1,5 @@
 import loginStyle from './login';
 import systemStyle from './system';
+import guidelineStyle from './guideline'
 
-export { loginStyle, systemStyle };
+export { guidelineStyle, loginStyle, systemStyle };

@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
-import { AsyncStorage, Button, Dimensions, TextInput, View } from 'react-native';
+import { 
+  AsyncStorage, TextInput, View 
+} from 'react-native';
+import { Button } from 'react-native-elements';
+
 import Logo from './Logo';
+
 import { withNavigation } from 'react-navigation';
+import { systemStyle } from '../assets/styles';
+import { PRIMARY } from '../assets/styles/colors';
 
 class FormLogin extends Component {
 
@@ -18,35 +25,42 @@ class FormLogin extends Component {
 
   render() {
     return (
-      <View style={{ width: Dimensions.get('screen').width - 10 }}>
+      <View style={systemStyle.containerForm}>
         
         <Logo />
 
         <View>
           <TextInput
             placeholder="Email"
+            selectionColor={PRIMARY}
             autoCapitalize="none"
             keyboardType='email-address'
+            autoFocus
             value={this.state.email}
-            style={{height: 40, borderColor: 'gray', borderWidth: 1, marginVertical: 10 }}
+            style={systemStyle.formInput}
             onChangeText={email => this.setState({ email })}
           />
           <TextInput
             placeholder="Senha"
+            selectionColor={PRIMARY}
             secureTextEntry 
             value={this.state.password}
-            style={{height: 40, borderColor: 'gray', borderWidth: 1, marginVertical: 10 }}
+            style={systemStyle.formInput}
             onChangeText={password => this.setState({ password })}
           />
         </View>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View style={systemStyle.containerButtons}>
           <Button
             title="Registrar"
-            onPress={this._login}
+            buttonStyle={systemStyle.buttonContainer}
+            titleStyle={systemStyle.titleStyle}
+            onPress={() => this.props.navigation.navigate('SignIn')}
           />
           <Button
             title="Logar"
+            buttonStyle={systemStyle.buttonContainer}
+            titleStyle={systemStyle.titleStyle}
             onPress={this._login}
           />
         </View>

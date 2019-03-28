@@ -1,7 +1,9 @@
 import React from 'react';
-import { LOGO } from '../assets/images';
+import { LOGO_CAPPTAN } from '../assets/images';
 import { Image } from 'react-native';
+import { systemStyle } from '../assets/styles' 
 
-const Logo = () => <Image source={LOGO} style={{ width: 100, height: 100, alignSelf: 'center' }}/>
+const Logo = () => 
+  <Image source={LOGO_CAPPTAN} style={systemStyle.logo}/>
 
 export default Logo;

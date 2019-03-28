@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { 
-  Button, Dimensions, KeyboardAvoidingView, TextInput, View 
+  KeyboardAvoidingView, TextInput, View 
 } from 'react-native';
+import { Button } from 'react-native-elements';
 
 import { withNavigation } from 'react-navigation';
+import { systemStyle } from '../assets/styles';
 
 class FormGuideline extends Component {
 
@@ -19,32 +21,36 @@ class FormGuideline extends Component {
   render() {
     const { navigation } = this.props;
     return (
-      <View style={{ width: Dimensions.get('screen').width - 10 }}>
+      <View style={systemStyle.containerForm}>
         <KeyboardAvoidingView>
           <TextInput
             placeholder="Título"
             autoCapitalize
             keyboardType='default'
             value={this.state.title}
-            style={{height: 40, borderColor: 'gray', borderWidth: 1, marginVertical: 10 }}
+            style={systemStyle.formInput}
             onChangeText={title => this.setState({ title })}
           />
           <TextInput
             placeholder="Descrição"
             autoCapitalize
             value={this.state.description}
-            style={{height: 40, borderColor: 'gray', borderWidth: 1, marginVertical: 10 }}
+            style={systemStyle.formInput}
             onChangeText={description => this.setState({ description })}
           />
         </KeyboardAvoidingView>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View style={systemStyle.containerButtons}>
           <Button
             title="Adicionar"
+            buttonStyle={systemStyle.buttonContainer}
+            titleStyle={systemStyle.titleStyle}
             onPress={this._handleAddGuideline}
           />
           <Button
             title="Cancelar"
+            buttonStyle={systemStyle.buttonContainer}
+            titleStyle={systemStyle.titleStyle}
             onPress={() => navigation.navigate('Actived')}
           />
         </View>
