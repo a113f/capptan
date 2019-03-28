@@ -11,7 +11,7 @@ class ProfileScreen extends Component {
     headerRight: (
       <Button
           onPress={() => {
-            AsyncStorage.removeItem('userToken');
+            AsyncStorage.removeItem('@Capptan:Token');
             navigation.navigate('AuthLoading');
           }}
           type="clear"
