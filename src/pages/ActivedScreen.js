@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { Button, Icon } from 'react-native-elements';
 
-import { systemStyle } from '../assets/styles'
+import { systemStyle } from '../assets/styles';
 import List from '../components/List';
 
 const guidelines = [
@@ -58,9 +59,24 @@ const guidelines = [
 
 class ActivedScreen extends Component {
 
-  static navigationOptions = () => ({
+  static navigationOptions = ({ navigation }) => ({
     title: "ATIVADAS",
-    headerRight: null, 
+    headerRight: (
+      <Button
+          onPress={() => {
+            navigation.navigate('New');
+          }}
+          type="clear"
+          icon={
+            <Icon
+              type="material"
+              name="add"
+              size={25}
+              color="white"
+            />
+          }
+        />
+    ),
     headerLeft: null,
   })
 
