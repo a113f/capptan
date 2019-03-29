@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { 
-  Alert, AsyncStorage, TextInput, View 
+import {
+  Alert, AsyncStorage, TextInput, View
 } from 'react-native';
 import { Button } from 'react-native-elements';
 
@@ -10,13 +10,15 @@ import { withNavigation } from 'react-navigation';
 import { systemStyle } from '../assets/styles';
 import { PRIMARY } from '../assets/styles/colors';
 
+import { connect } from 'react-redux'
+import { login } from '../store/actions/user'
+
 import api from '../utils/api';
 import ErrorMessage from './ErrorMessage';
 
 class FormLogin extends Component {
 
   state = {
-    name: 'Allef Gomes',
     email: 'allef@gomes.com',
     password: '12341234',
     errorEmail: false,
@@ -29,27 +31,30 @@ class FormLogin extends Component {
     let { navigation } = this.props
     let { name, email, password } = this.state;
 
-    if (name == ''|| email == '' || password == '') {
-      if (email == '')
-        this.setState(() => ({ loading: false, errorEmail: true }))
+    if (email == '' || password == '') {
       if (email == '')
         this.setState(() => ({ loading: false, errorEmail: true }))
       if (password == '')
         this.setState(() => ({ loading: false, errorPassword: true }))
-      
-      return 
+
+      return
     } else {
       this.setState(() => ({ errorEmail: false, errorPassword: false }))
     }
-    
+
     const response = await api.post('/auth', {
       auth: { email, password }
     });
 
     if (response.ok) {
-      let { token } = response.data
-      
-      await AsyncStorage.setItem('@Capptan:Token', token);
+      let { token, user } = response.data
+
+      await AsyncStorage.multiSet([
+        ['@Capptan:Token', token],
+        ['@Capptan:user', JSON.stringify(user)]
+      ]);
+
+      this.props.onLogin({ user })
       this.setState({ loading: false })
       navigation.navigate('Actived')
     } else {
@@ -67,7 +72,7 @@ class FormLogin extends Component {
   render() {
     return (
       <View style={systemStyle.containerForm}>
-        
+
         <Logo />
 
         <View>
@@ -83,7 +88,7 @@ class FormLogin extends Component {
             onChangeText={email => this.setState({ email })}
           />
           {
-            this.state.errorEmail ? 
+            this.state.errorEmail ?
             <ErrorMessage message="Email é obrigatório" color="red" /> :
             <View />
           }
@@ -91,14 +96,14 @@ class FormLogin extends Component {
           <TextInput
             placeholder="Senha"
             selectionColor={PRIMARY}
-            secureTextEntry 
+            secureTextEntry
             editable={!this.state.loading}
             value={this.state.password}
             style={systemStyle.formInput}
             onChangeText={password => this.setState({ password })}
           />
           {
-            this.state.errorPassword ? 
+            this.state.errorPassword ?
             <ErrorMessage message="Senha é obrigatório" color="red" /> :
             <View />
           }
@@ -126,10 +131,16 @@ class FormLogin extends Component {
             onPress={this._login}
           />
         </View>
-        
-      </View>  
+
+      </View>
     );
   }
 }
 
-export default withNavigation(FormLogin);
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: user => dispatch(login(user))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(withNavigation(FormLogin));

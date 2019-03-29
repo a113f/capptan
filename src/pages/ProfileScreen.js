@@ -11,7 +11,7 @@ class ProfileScreen extends Component {
     headerRight: (
       <Button
           onPress={() => {
-            AsyncStorage.removeItem('@Capptan:Token');
+            AsyncStorage.clear();
             navigation.navigate('AuthLoading');
           }}
           type="clear"
@@ -24,15 +24,26 @@ class ProfileScreen extends Component {
             />
           }
         />
-    ), 
+    ),
     headerLeft: null,
   })
 
+  state = {
+    user: {}
+  }
+
+  componentDidMount = async () => {
+    const user = JSON.parse(await AsyncStorage.getItem('@Capptan:user'));
+    this.setState({ user });
+    console.log(this.state)
+  }
+
   render() {
+    let { user } = this.state;
     return (
       <View style={systemStyle.container}>
-        <Text>Nome: Fulano</Text>
-        <Text>Email: fulano@allef.com</Text>
+        <Text>Nome: { user.name }</Text>
+        <Text>Email: { user.email }</Text>
       </View>
     );
   }
