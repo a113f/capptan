@@ -2,11 +2,12 @@ import { StyleSheet } from 'react-native';
 import { WIDTH } from '../../utils/constants';
 
 const guideline = StyleSheet.create({
-  container: { 
-    backgroundColor: "white", borderRadius: 5, 
-    width: WIDTH - 20, 
+  container: {
+    zIndex: 9999,
+    backgroundColor: "white", borderRadius: 5,
+    width: WIDTH - 20,
     padding: 10,
-    margin: 5,  
+    margin: 5,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
