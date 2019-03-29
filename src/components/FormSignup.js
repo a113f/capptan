@@ -49,8 +49,8 @@ class FormSignup extends Component {
 
     if (response.ok) {
       let { token } = response.data
-
       await AsyncStorage.setItem('@Capptan:Token', token);
+
       this.setState({ loading: false })
       navigation.navigate('Actived')
     } else {
