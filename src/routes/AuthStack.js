@@ -2,12 +2,12 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
-import SignInScreen from '../pages/SignInScreen';
+import SignupScreen from '../pages/SignupScreen';
 import LoginScreen from '../pages/LoginScreen';
 
 const AuthStack = createStackNavigator({ 
   Login: LoginScreen,
-  SignIn: SignInScreen 
+  Signup: SignupScreen 
 }, {
   headerMode: 'none'
 });

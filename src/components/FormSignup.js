@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { 
-  Alert, AsyncStorage, TextInput, View 
+import {
+  Alert, AsyncStorage, TextInput, View
 } from 'react-native';
 import { Button } from 'react-native-elements';
 
@@ -13,13 +13,14 @@ import { PRIMARY } from '../assets/styles/colors';
 import api from '../utils/api';
 import ErrorMessage from './ErrorMessage';
 
-class FormLogin extends Component {
+class FormSignup extends Component {
 
   state = {
     name: 'Allef Gomes',
     email: 'allef@gomes.com',
     password: '12341234',
     errorEmail: false,
+    errorName: false,
     errorPassword: false,
     loading: false
   }
@@ -29,33 +30,33 @@ class FormLogin extends Component {
     let { navigation } = this.props
     let { name, email, password } = this.state;
 
-    if (name == ''|| email == '' || password == '') {
+    if (email == '' || name == '' || password == '') {
       if (email == '')
         this.setState(() => ({ loading: false, errorEmail: true }))
-      if (email == '')
-        this.setState(() => ({ loading: false, errorEmail: true }))
+      if (name == '')
+        this.setState(() => ({ loading: false, errorName: true }))
       if (password == '')
         this.setState(() => ({ loading: false, errorPassword: true }))
-      
-      return 
+
+      return
     } else {
-      this.setState(() => ({ errorEmail: false, errorPassword: false }))
+      this.setState(() => ({ errorEmail: false, errorPassword: false, errorName: false }))
     }
-    
-    const response = await api.post('/auth', {
-      auth: { email, password }
+
+    const response = await api.post('/users', {
+      user: { name, email, password }
     });
 
     if (response.ok) {
       let { token } = response.data
-      
+
       await AsyncStorage.setItem('@Capptan:Token', token);
       this.setState({ loading: false })
       navigation.navigate('Actived')
     } else {
       Alert.alert(
         'Credenciais incorretas!',
-        'A senha ou email que digitou está incorreta',
+        'O email digitado já tem conta no sistema.',
         [
           {text: 'OK', onPress: () => {}},
         ],
@@ -67,10 +68,27 @@ class FormLogin extends Component {
   render() {
     return (
       <View style={systemStyle.containerForm}>
-        
+
         <Logo />
 
         <View>
+          <TextInput
+            placeholder="Nome"
+            selectionColor={PRIMARY}
+            autoCapitalize="none"
+            keyboardType='default'
+            autoFocus
+            editable={!this.state.loading}
+            value={this.state.name}
+            style={systemStyle.formInput}
+            onChangeText={name => this.setState({ name })}
+          />
+          {
+            this.state.errorName ?
+            <ErrorMessage message="Nome é obrigatório" color="red" /> :
+            <View />
+          }
+
           <TextInput
             placeholder="Email"
             selectionColor={PRIMARY}
@@ -83,7 +101,7 @@ class FormLogin extends Component {
             onChangeText={email => this.setState({ email })}
           />
           {
-            this.state.errorEmail ? 
+            this.state.errorEmail ?
             <ErrorMessage message="Email é obrigatório" color="red" /> :
             <View />
           }
@@ -91,14 +109,14 @@ class FormLogin extends Component {
           <TextInput
             placeholder="Senha"
             selectionColor={PRIMARY}
-            secureTextEntry 
+            secureTextEntry
             editable={!this.state.loading}
             value={this.state.password}
             style={systemStyle.formInput}
             onChangeText={password => this.setState({ password })}
           />
           {
-            this.state.errorPassword ? 
+            this.state.errorPassword ?
             <ErrorMessage message="Senha é obrigatório" color="red" /> :
             <View />
           }
@@ -107,16 +125,16 @@ class FormLogin extends Component {
 
         <View style={systemStyle.containerButtons}>
           <Button
-            title={ this.state.loading ? "Aguarde..." : "Registrar"}
+            title={ this.state.loading ? "Aguarde..." : "Logar"}
             disabled={this.state.loading}
             disabledStyle={systemStyle.buttonContainer}
             disabledTitleStyle={systemStyle.titleStyle}
             buttonStyle={systemStyle.buttonContainer}
             titleStyle={systemStyle.titleStyle}
-            onPress={() => this.props.navigation.navigate('Signup')}
+            onPress={() => this.props.navigation.navigate('SignIn')}
           />
           <Button
-            title={ this.state.loading ? "Logando..." : "Entrar"}
+            title={ this.state.loading ? "Cadastrando..." : "Cadastrar"}
             loading={this.state.loading}
             disabled={this.state.loading}
             disabledStyle={systemStyle.buttonContainer}
@@ -126,10 +144,10 @@ class FormLogin extends Component {
             onPress={this._login}
           />
         </View>
-        
-      </View>  
+
+      </View>
     );
   }
 }
 
-export default withNavigation(FormLogin);
+export default withNavigation(FormSignup);

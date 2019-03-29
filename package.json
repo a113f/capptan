@@ -10,6 +10,7 @@
   "dependencies": {
     "apisauce": "^1.0.2",
     "react": "16.8.3",
+    "react-loading-skeleton": "^1.1.1",
     "react-native": "0.59.2",
     "react-native-elements": "^1.1.0",
     "react-native-gesture-handler": "^1.1.0",
